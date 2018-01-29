@@ -29,6 +29,11 @@ public class EditerCollaborateurController extends HttpServlet{
 			
 		
 			champsvalide=false;
+			if (err!=": ")
+			{
+				err+=", titre";
+			}
+			else
 			err += " titre ";
 
 			
@@ -39,7 +44,14 @@ public class EditerCollaborateurController extends HttpServlet{
 			
 		
 			champsvalide=false;
-			err +=" nom ";
+			champsvalide=false;
+			if (err!=": ")
+			{
+				err+=", nom";
+			}
+			else
+			err += " nom ";
+
 			
 		}
 		 if((prenom == null)||(prenom==""))
@@ -47,7 +59,14 @@ public class EditerCollaborateurController extends HttpServlet{
 			
 			
 			champsvalide=false;
-			err +=" prenom ";
+			champsvalide=false;
+			if (err!=": ")
+			{
+				err+=", prenom";
+			}
+			else
+			err += " prenom ";
+
 		}
 	
 		
@@ -56,7 +75,14 @@ public class EditerCollaborateurController extends HttpServlet{
 			
 			
 			champsvalide=false;
-			err +=" matricule ";
+			champsvalide=false;
+			if (err!=": ")
+			{
+				err+=", matricule";
+			}
+			else
+			err += " matricule ";
+
 			
 		}
 		
