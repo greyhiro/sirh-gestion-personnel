@@ -8,6 +8,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sirh-gestion-personnel Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
+	<build>
+		<finalName>sgp</finalName>
+		<sourceDirectory>src/main/java</sourceDirectory>
+	</build>
 
 
 	<properties>
@@ -31,8 +36,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<build>
-		<finalName>sgp</finalName>
-
-	</build>
+	
 </project>
