@@ -1,123 +1,61 @@
 package dev.sgp.web;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.net.ssl.SSLEngineResult.Status;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import dev.sgp.service.CollaborateurService;
+import dev.sgp.util.Constantes;
+import dev.sgp.entite.Collaborateur;
 
+public class EditerCollaborateurController extends HttpServlet {
 
-public class EditerCollaborateurController extends HttpServlet{
-	
-	
+	private CollaborateurService collabService = Constantes.COLLAB_SERVICE;
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		boolean champsvalide;
-		champsvalide=true;
-		
-		String matricule= req.getParameter("matricule");
-		String titre = req.getParameter("titre");
+
+		Collaborateur collab = new Collaborateur();
+
 		String nom = req.getParameter("nom");
+		collab.setNom(nom);
+		
 		String prenom = req.getParameter("prenom");
-		String err = ": ";
+		collab.setPrenom(prenom);
 		
-		if((titre == null)||(titre==""))
-		{
-			
+		String anneeDeNaissance = req.getParameter("dateDeNaissance");
+		LocalDate dateNaiss =LocalDate.parse(anneeDeNaissance, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		collab.setDateDeNaissance(dateNaiss);
 		
-			champsvalide=false;
-			if (err!=": ")
-			{
-				err+=", titre";
-			}
-			else
-			err += " titre ";
+		String photo = req.getParameter("photo");
+		collab.setPhoto(photo);
+		
+		String adresse = req.getParameter("adresse");
+		collab.setAdresse(adresse);
+		
+		String numeroDeSécu= req.getParameter("numSecu");
+		collab.setNumeroDeSecuriteSociale(numeroDeSécu);
+		
+		String mail = req.getParameter("email");
+		collab.setEmailPro(mail);
+		
+		collab.setActif(true);
+		
+		
+		ZonedDateTime zone = ZonedDateTime.now();
+		
+		collab.setDateHeureCreation(zone);
+		
+		collabService.sauvegarderCollaborateur(collab);
+		req.setAttribute("collaborateurs",collabService.listerCollaborateurs());
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+	}
 
-			
-		}
-		
-		 if((nom == null)||(nom==""))
-		{
-			
-		
-			champsvalide=false;
-			champsvalide=false;
-			if (err!=": ")
-			{
-				err+=", nom";
-			}
-			else
-			err += " nom ";
-
-			
-		}
-		 if((prenom == null)||(prenom==""))
-		{
-			
-			
-			champsvalide=false;
-			champsvalide=false;
-			if (err!=": ")
-			{
-				err+=", prenom";
-			}
-			else
-			err += " prenom ";
-
-		}
-	
-		
-		 if((matricule == null)||(matricule==""))
-		{
-			
-			
-			champsvalide=false;
-			champsvalide=false;
-			if (err!=": ")
-			{
-				err+=", matricule";
-			}
-			else
-			err += " matricule ";
-
-			
-		}
-		
-		
-		
-		if (champsvalide==true){
-			resp.setStatus(201);
-		
-		resp.getWriter().write("<h1>Liste des collaborateurs</h1>" + "<ul>" + "<li>Matricule=" + matricule
-				+ "</li>"+
-				"<li>Titre=" + titre
-				+ "</li>"+
-				"<li>Nom=" + nom
-				+ "</li>"+
-				"<li>Prenom=" + prenom
-				+ "</li>");
-
-		
-		}
-		
-		else{
-			
-			resp.setStatus(401);
-			int statut=resp.getStatus();
-			resp.getWriter().write("Statut: "+statut +" Il manque des parametres dans les champs saisies" +err);
-		}
-		
-		
-		
-		
-			}
-		
-	
-	
-
-	
-	
 }

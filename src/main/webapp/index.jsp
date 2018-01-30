@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"
+	import="java.util.List, dev.sgp.entite.Collaborateur"%>
 
-import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,12 +27,12 @@ import="java.util.List"%>
 			<ul class="navbar-nav">
 
 				<li class="nav-item"><a class="nav-link"
-					href="views/collab/formulaireEditionCollab.jsp">Collaborateurs</a>
+					href="../views/collab/formulaireEditionCollab.jsp">Collaborateurs</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="views/collab/statistique.jsp">Statistiques</a>
-				</li>
+				<li class="nav-item"><a class="nav-link"
+					href="../views/collab/statistique.jsp">Statistiques</a></li>
 				<li class="nav-item"><a class="nav-link disabled"
-					href="views/collab/activite.jsp">Activités</a></li>
+					href="../views/collab/activite.jsp">Activités</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -48,43 +48,27 @@ import="java.util.List"%>
 
 			<div class="col-lg-2 col-md-6 col-sm-12">
 				<button type="button" class="btn-primary btn-sm float-left"
-					onclick="window.location.href='views/collab/collaborateur.jsp'">création
+					onclick="window.location.href='../views/collab/collaborateur.jsp'">création
 					d'un nouveau collaborateur</button>
 
 			</div>
 		</div>
 	</div>
-	
-<div class="row">
-	<div class="col-lg-12 col-md-12 col-sm-12">
-				<button type="button" class="btn-primary btn-sm float-left"
-				
-			
-					onclick="window.location.href='../collaborateurs/lister'">
-					
-					lister les collaborateurs présent</button>
 
-			</div>
-			
-	
-<div class="col-lg-12 col-md-12 col-sm-12">
-<ul>
-<%
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12">
+			<button type="button" class="btn-primary btn-sm float-left"
+				onclick="window.location.href='../collaborateurs/lister'">
 
-List<String> listeNoms =(List<String>)request.getAttribute("listeNoms");
-if (listeNoms!=null)
-{
-for (String nom : listeNoms) {
+				lister les collaborateurs présent</button>
 
-%>
-<li><%= nom %></li>
-<%
-}}
-%>
-</ul>
-</div>
+		</div>
 
-</div>
+
+
+
+
+	</div>
 	<br>
 	<br>
 	<div class="container-fluid">
@@ -154,91 +138,52 @@ for (String nom : listeNoms) {
 	<br>
 	<div class="container-fluid">
 		<div class="row">
+					<%
+						List<Collaborateur> listcollab = (List<Collaborateur>) request.getAttribute("collaborateurs");
+						if (listcollab != null) {
+							for (Collaborateur collaborateur : listcollab) {
+					%>
+
 			<div class="col-lg-4 col-sm-12 col-md-6">
 				<div class="card" style="width: 18rem;">
-					<img class="card-img-top" src="image/index.jpg"
-						alt="Card image cap">
+
+					<img class="card-img-top" src=<%=collaborateur.getPhoto()%> alt="Card image cap">
 					<div class="card-body">
-						<h5 class="card-title">Julia Tilmith</h5>
-						<p class="card-text">Passionné de vie</p>
-						<a href="#" class="btn btn-primary">profil</a>
+					<h5 class="card-title"><%=collaborateur.getNom()+" "+ collaborateur.getPrenom()  %></h5>
+					<p class="card-text">
+					adresse: <%= collaborateur.getAdresse() %>
+					 <br>
+					 Date de naissance:<%=collaborateur.getDateDeNaissance() %>
+					 <br>
+					 matricule: <%=collaborateur.getMatricule() %>
+					 <br>
+					 Email: <%=collaborateur.getEmailPro() %>
+					 <br>
+					 Numéro de sécurité social: <%=collaborateur.getNumeroDeSecuriteSociale() %>
+					 <br>
+					 Date et Heure de création: <%= collaborateur.getDateHeureCreation() %>
+					 
+					 
+					 
+					 
+					
+				</p>
+						
+
+
 					</div>
 				</div>
 
 			</div>
-
-			<div class="col-lg-4 col-sm-12 col-md-6">
-
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="image/gerer-personne-agressive.jpg" alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Leon Paulo</h5>
-						<p class="card-text">Toujours en colère pour un rien mais
-							travailleur</p>
-						<a href="#" class="btn btn-primary">Profil</a>
-					</div>
-				</div>
-
-			</div>
-			<div class="col-lg-4 col-sm-12 col-md-6">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="image/gestion-agressivite-light.jpg" alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Mamie Nova</h5>
-						<p class="card-text">Parfaite pour augmenter son taux de
-							colesterol et avoir des jours de congé maladies</p>
-						<a href="#" class="btn btn-primary">profil</a>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="col-lg-4 col-sm-12 col-md-6">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top" src="image/maxpeopleworld832990.jpg"
-						alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Un humoriste je crois</h5>
-						<p class="card-text">Humoriste de service</p>
-						<a href="#" class="btn btn-primary">profil</a>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="col-lg-4 col-sm-12 col-md-6">
-
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="image/1461918-titre-presidente-commission-droits-personne.jpg"
-						alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Linoa Hearty</h5>
-						<p class="card-text">crétrice d'histoire pour enfants</p>
-						<a href="#" class="btn btn-primary">profil</a>
-					</div>
-				</div>
-
-			</div>
-			<div class="col-lg-4 col-sm-12 col-md-6">
-				<div class="card" style="width: 18rem;">
-					<img class="card-img-top"
-						src="image/iStock_84615769_SMALL-e1474531457886-820x410.jpg"
-						alt="Card image cap">
-					<div class="card-body">
-						<h5 class="card-title">Mokey Nikolas</h5>
-						<p class="card-text">Jeune chef d'entreprise</p>
-						<a href="#" class="btn btn-primary">profil</a>
-					</div>
-				</div>
-
-			</div>
+<%
+							}
+							}
+						%>
 		</div>
+
 	</div>
-	
-	
+
+
 
 
 

@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sirh-gestion-personnel Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<build>
 		<finalName>sgp</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -35,6 +35,12 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
-	
+
 </project>
